@@ -8,7 +8,7 @@
     ```
 
 
-<h2> For Installation Purpose <h2>
+<h2> For Installation Purpose </h2>
 
 1. **Fast API**
     ```bash
@@ -19,19 +19,8 @@
     ```bash
     pip install "uvicorn[standard]"
     ```
+    
 3. **Aiosqlite**
     ```bash
     pip install "aiosqlite"
     ```
-
-4. **Others**
-    ```bash
-    pip install sqlalchemy async-exit-stack async-generator
-    ```
-
-pip install fastapi[all] sqlalchemy aiomysql
-
-
-pip install fastapi
-pip install uvicorn
-pip install databases
