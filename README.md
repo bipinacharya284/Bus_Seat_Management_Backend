@@ -2,7 +2,7 @@
 
 <h2> For running server </h2>
 
-**Run server**
+1. **Run server**
     ```bash
     uvicorn main:app --reload
     ```
