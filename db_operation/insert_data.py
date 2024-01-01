@@ -13,9 +13,11 @@ def insert_into_client(name: str, phone: str, rfid_id: str, amount : int):
       cursor.execute("INSERT INTO client (name, phone, rfid_id,amount) VALUES (?, ?,?,?)", (name, phone,rfid_id,amount))
       conn.commit()
       conn.close()
+      return True
    except sqlite3.Error as e:
       print(f"Error: {e}")
       conn.rollback()  # Rollback the changes if an error occurs
+      return False
    finally:
       conn.close()
 
