@@ -1,7 +1,9 @@
 import sqlite3
 
+# Importing database file
 DB_FILE = "./db_operation/database.db"
 
+# For creating client table
 def create_table_client():
    try:
       conn = sqlite3.connect(DB_FILE)
@@ -24,6 +26,7 @@ def create_table_client():
    finally:
       conn.close()
 
+# Create travel_log table
 def create_table_travel_log():
    try:
       conn = sqlite3.connect(DB_FILE)
@@ -46,6 +49,7 @@ def create_table_travel_log():
       conn.close()
 
 
+# Create payment_log table
 def create_table_payment_log():
    try:
       conn = sqlite3.connect(DB_FILE)
@@ -70,6 +74,6 @@ def create_table_payment_log():
 
 
 
-create_table_client()
-create_table_travel_log()
-create_table_payment_log()
+# create_table_client()
+# create_table_travel_log()
+# create_table_payment_log()
