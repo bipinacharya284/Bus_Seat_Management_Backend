@@ -2,8 +2,8 @@
 
 <h2> For running server </h2>
 
-**Run server**
-    ```bash
+1. **Run server**
+```bash
     uvicorn main:app --reload
     ```
 
