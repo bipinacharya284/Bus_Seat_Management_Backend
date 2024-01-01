@@ -2,11 +2,11 @@ import sqlite3
 from typing import List, Optional
 import json
 
-
+# Importing database file
 DB_FILE = "./db_operation/database.db"
 
 
-
+# Gives inforamtion of all clients
 def get_all_clients():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
@@ -20,7 +20,9 @@ def get_all_clients():
 # results = get_all_clients()
 # print(results)
 
+# Gives data of only one client
 def get_client(cid: int):
+    """ cid: int """
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM client WHERE cid=?", (str(cid)))
@@ -33,8 +35,9 @@ def get_client(cid: int):
 # result = get_client(1)  
 # print(result)
 
-
+# Gives travel log search by cid
 def get_travel_log_by_cid(cid: int):
+    """ cid: int """
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM travel_log WHERE cid=?", (str(cid)))
@@ -47,8 +50,9 @@ def get_travel_log_by_cid(cid: int):
 # result = get_travel_log_by_cid(1)  
 # print(result)
 
-
+# Gives travel log search by tid
 def get_travel_log_by_tid(tid: int):
+    """ tid : int """
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM travel_log WHERE tid=?", (str(tid)))
@@ -61,8 +65,9 @@ def get_travel_log_by_tid(tid: int):
 # result = get_travel_log_by_tid(2)  
 # print(result)
 
-
+# Gives payment log search by cid
 def get_payment_log_cid(cid: int):
+    """ cid: int """
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM payment_log WHERE cid=?", (str(cid)))
@@ -75,7 +80,10 @@ def get_payment_log_cid(cid: int):
 # result = get_payment_log_cid(1)  
 # print(result)
 
+
+# Gives payment log search by pid
 def get_payment_log_by_pid(pid: int):
+    """pid: int"""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM payment_log WHERE pid=?", (str(pid)))

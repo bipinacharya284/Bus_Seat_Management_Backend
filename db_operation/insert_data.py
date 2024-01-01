@@ -1,9 +1,12 @@
 import sqlite3
 
+# Importing database file
 DB_FILE = "./db_operation/database.db"
 
 
+# Inserting data into client table
 def insert_into_client(name: str, phone: str, rfid_id: str, amount : int):
+   """ name : str, phone : str, rfid_id : str, amount : int """
    try:
       conn = sqlite3.connect(DB_FILE)
       cursor = conn.cursor()
@@ -20,7 +23,9 @@ def insert_into_client(name: str, phone: str, rfid_id: str, amount : int):
 # insert_into_client('Hari','9444545','66:55:Q6',500)
 
 
-def entry_travel_log(cid: int):
+# Inserting data for recording the entry of client
+def entry_travel_log(cid: int): 
+   """ cid : int """
    try:
       conn = sqlite3.connect(DB_FILE)
       cursor = conn.cursor()
@@ -46,7 +51,9 @@ def entry_travel_log(cid: int):
 # entry_travel_log(1)
 # entry_travel_log(2)
 
+# Inserting data for recording the exit of client
 def exit_travel_log(cid:int):
+   """ cid : int """
    try:
       conn = sqlite3.connect(DB_FILE)
       cursor = conn.cursor()
@@ -66,8 +73,9 @@ def exit_travel_log(cid:int):
 
 # exit_travel_log(1)
 
-
+# Inserting the transaction log
 def insert_transaction_log(cid:int, trans_type:str, trans_amt:int ):
+   """ cid : int, trans_type : str, trans_amt : int """
    try:
       conn = sqlite3.connect(DB_FILE)
       cursor = conn.cursor()

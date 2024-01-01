@@ -4,6 +4,7 @@ DB_FILE = "./db_operation/database.db"
 
 
 def update_client(cid: int, name: str, phone: str, rfid_id:str):
+    """ cid: int, name: str, phone: str, rfid_id:str """
     try:
         conn = sqlite3.connect(DB_FILE)
         cursor = conn.cursor()
