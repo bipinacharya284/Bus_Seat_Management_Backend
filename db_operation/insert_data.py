@@ -91,13 +91,6 @@ def insert_transaction_log(cid:int, trans_type:str, trans_amt:int ):
 # insert_transaction_log(1,"credit",500)
 
 
-# def update_item(item_id: int, name: str, description: str):
-#     conn = sqlite3.connect(DB_FILE)
-#     cursor = conn.cursor()
-#     cursor.execute("UPDATE items SET name=?, description=? WHERE id=?", (name, description, item_id))
-#     conn.commit()
-#     conn.close()
-
 # def delete_item(item_id: int):
 #     conn = sqlite3.connect(DB_FILE)
 #     cursor = conn.cursor()
