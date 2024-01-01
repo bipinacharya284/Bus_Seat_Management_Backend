@@ -15,4 +15,4 @@ def update_client(cid: int, name: str, phone: str, rfid_id:str):
     finally:
         conn.close()
 
-update_client(1,"Bipin","11111","9845665")
+# update_client(1,"Bipin","11111","9845665")
