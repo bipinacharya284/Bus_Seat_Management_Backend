@@ -26,6 +26,25 @@ def create_table_client():
    finally:
       conn.close()
 
+def create_seat_table():
+   try:
+      conn = sqlite3.connect(DB_FILE)
+      cursor = conn.cursor()
+      cursor.execute("""
+      CREATE TABLE seat (
+                  sid INTEGER PRIMARY KEY AUTOINCREMENT,
+                  seatname VARCHAR(5),
+                  seattype VARCHAR(10),
+                  is_occupied INTEGER DEFAULT 0
+            )
+""")
+   except sqlite3.Error as e:
+      print(f"Error: {e}")
+      conn.rollback()  # Rollback the changes if an error occurs
+   finally:
+      conn.close()
+
+
 # Create travel_log table
 def create_table_travel_log():
    try:
@@ -34,10 +53,13 @@ def create_table_travel_log():
       cursor.execute("""
          CREATE TABLE travel_log (
                tid INTEGER PRIMARY KEY AUTOINCREMENT,
-               cid INTEGER ,
+               cid INTEGER,
                entry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+               fare INTEGER,
+               sid INTEGER,
                exit_time TIMESTAMP,
-               FOREIGN KEY (cid) REFERENCES client (cid)
+               FOREIGN KEY (cid) REFERENCES client (cid),
+               FOREIGN KEY (sid) REFERENCES seat (sid)
          )
       """)
       conn.commit()
@@ -47,6 +69,8 @@ def create_table_travel_log():
       conn.rollback()  # Rollback the changes if an error occurs
    finally:
       conn.close()
+
+
 
 
 # Create payment_log table
@@ -72,6 +96,8 @@ def create_table_payment_log():
    finally:
       conn.close()
 
+
+# create_seat_table()
 
 
 # create_table_client()
