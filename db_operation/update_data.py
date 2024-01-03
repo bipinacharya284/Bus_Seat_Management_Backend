@@ -59,5 +59,6 @@ def toggle_seat_status(sid: int):
         return False
     finally:
         conn.close()
+        
 
 # toggle_seat_status(1)

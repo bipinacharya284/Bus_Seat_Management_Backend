@@ -43,16 +43,15 @@ def insert_seat(seatname: str, seattype: str):
 
 # Inserting the transaction log
 def insert_transaction_log(cid:int, trans_type:str, trans_amt:int ):
-   """ cid : int, trans_type : str, trans_amt : int """
    try:
       conn = sqlite3.connect(DB_FILE)
       cursor = conn.cursor()
       cursor.execute("PRAGMA foreign_keys = ON")
       cursor.execute("INSERT INTO payment_log(cid, trans_type, trans_amt) VALUES (?, ?,?)", (str(cid), trans_type, str(trans_amt)))
       if cursor.rowcount >0:
-         if(trans_type == "credit"):    
+         if(trans_type == "CREDIT"):    
             cursor.execute("UPDATE client SET amount = amount + ? WHERE cid=?", (str(trans_amt),str(cid)))
-         if(trans_type == "debit"):
+         if(trans_type == "DEBIT"):
             cursor.execute("UPDATE client SET amount = amount - ? WHERE cid=?", (str(trans_amt),str(cid)))
          conn.commit()
          conn.close()

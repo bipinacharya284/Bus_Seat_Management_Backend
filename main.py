@@ -2,7 +2,7 @@ import json
 from fastapi import FastAPI, HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from db_operation.insert_data import insert_into_client,insert_transaction_log,exit_travel_log,entry_travel_log
+from db_operation.insert_data import insert_into_client,insert_transaction_log
 from db_operation.get_data import get_all_clients,get_client,get_payment_log_by_pid,get_payment_log_by_cid,get_travel_log_by_cid,get_travel_log_by_tid,get_travel_log
 from db_operation.update_data import update_client
 # from db_operation.get_data import get_payment_log_cid
