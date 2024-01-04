@@ -24,7 +24,7 @@ def insert_into_client(name: str, phone: str, rfid_id: str, amount : int):
 # insert_into_client('Kumar','9444545','66:44:7A:55',500)
 # insert_into_client('Hari','9444545','66:55:Q6',500)
 
-def insert_seat(seatname: str, seattype: str):
+def insert_into_seat(seatname: str, seattype: str):
    try:
       conn = sqlite3.connect(DB_FILE)
       cursor = conn.cursor()
