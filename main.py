@@ -3,12 +3,22 @@ from fastapi import FastAPI, HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from db_operation.insert_data import insert_into_client,insert_transaction_log,insert_into_seat
-from db_operation.get_data import get_all_clients,get_client,get_payment_log_by_pid,get_payment_log_by_cid,get_travel_log_by_cid,get_travel_log_by_tid,get_travel_log
+from db_operation.get_data import get_all_clients,get_client,get_payment_log_by_pid,get_payment_log_by_cid,get_travel_log_by_cid,get_travel_log_by_tid,get_travel_log,get_all_seats
 from db_operation.update_data import update_client
 # from db_operation.get_data import get_payment_log_cid
 from db_operation.travel import entry_travel_log,exit_travel_log
+from db_operation.get_data import is_valid_rfid,get_client_by_rfid
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Update this to your actual frontend domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # For Client
 
@@ -89,7 +99,12 @@ async def create_transaction(client_id: int, transaction_type: str, transaction_
         return JSONResponse(status_code=200, content="Transaction Successful")
     else:
         raise HTTPException(status_code=500, detail="Internal Server Error")
-    
+
+@app.get("/paymentlog/{pid}", tags=["Transaction"])
+async def get_transaction(pid: int):
+    json_string = get_payment_log_by_pid(pid)
+    return json_string
+   
 
 @app.post("/travel/entry", tags=["Travel Log"])
 async def create_travel_entry(client_id: int):
@@ -107,3 +122,34 @@ async def create_travel_exit(client_id:int):
 async def insert_seat(seatname: str, seattype:str):
     json_string = insert_into_seat(seatname, seattype)
     return json_string
+
+@app.get("/valid/{rfid}",tags=["Client"])
+async def check_validity(rfid: str):
+    if is_valid_rfid(rfid):
+        return True
+    else:
+        return False
+    
+@app.get("/valid/rfid/{rfid}",tags=["Client"])
+async def get_valid_client(rfid: str):
+    json_string = get_client_by_rfid(rfid)
+    json_data = json.loads(json_string)
+    return JSONResponse(content=json_data, status_code=200)
+
+
+@app.post("/travellog/",tags=["travel"])
+async def check_if_client(cid: int):
+    entry_return = entry_travel_log(cid)
+    if entry_return == "AlreadyExists":
+        exit_travel_log(cid)
+        return "Seat Released"
+    else:
+        return entry_return["seatname"]
+
+
+@app.get("/getallseat/",tags=["Seat"])
+async def get_seat():
+    # get_all_seats
+    json_data = json.loads(get_all_seats())
+    return JSONResponse(content=json_data, status_code=200)
+    # return get_all_seats
