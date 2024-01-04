@@ -2,10 +2,11 @@ import json
 from fastapi import FastAPI, HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from db_operation.insert_data import insert_into_client,insert_transaction_log
+from db_operation.insert_data import insert_into_client,insert_transaction_log,insert_into_seat
 from db_operation.get_data import get_all_clients,get_client,get_payment_log_by_pid,get_payment_log_by_cid,get_travel_log_by_cid,get_travel_log_by_tid,get_travel_log
 from db_operation.update_data import update_client
 # from db_operation.get_data import get_payment_log_cid
+from db_operation.travel import entry_travel_log,exit_travel_log
 
 app = FastAPI()
 
@@ -88,3 +89,21 @@ async def create_transaction(client_id: int, transaction_type: str, transaction_
         return JSONResponse(status_code=200, content="Transaction Successful")
     else:
         raise HTTPException(status_code=500, detail="Internal Server Error")
+    
+
+@app.post("/travel/entry", tags=["Travel Log"])
+async def create_travel_entry(client_id: int):
+    # if entry_travel_log(client_id):
+    # return "Response Hit"
+    json_string = entry_travel_log(client_id)
+    return json_string
+   
+@app.post("/travel/exit",tags=["Travel Log"])
+async def create_travel_exit(client_id:int):
+    json_string = exit_travel_log(client_id)
+    return json_string
+
+@app.post("/seat",tags=["Seat"])
+async def insert_seat(seatname: str, seattype:str):
+    json_string = insert_into_seat(seatname, seattype)
+    return json_string
