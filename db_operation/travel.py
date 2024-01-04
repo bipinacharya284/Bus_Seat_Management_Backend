@@ -43,6 +43,7 @@ def entry_travel_log(cid: int):
 
       else:
             print("Record already Entered")
+            return "AlreadyExists"
 
       conn.commit()
       conn.close()

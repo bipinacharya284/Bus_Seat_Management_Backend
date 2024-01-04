@@ -158,7 +158,7 @@ def get_payment_log_by_pid(pid: int):
 
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM payment_log WHERE pid=?", (str(pid)))
+    cursor.execute("SELECT * FROM payment_log WHERE pid=?", (pid,))
     result = cursor.fetchone()
     data_list = [dict(zip(['pid','cid', 'trans_type', 'trans_amt','trans_time'], result)) ]
     results_json = json.dumps(data_list, indent=2)
@@ -176,6 +176,7 @@ def is_valid_rfid(rfid_id: str):
         result = cursor.fetchone()
         if result:
             return True
+            pass
 
         else:
             return False
