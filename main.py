@@ -153,3 +153,7 @@ async def get_seat():
     json_data = json.loads(get_all_seats())
     return JSONResponse(content=json_data, status_code=200)
     # return get_all_seats
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
