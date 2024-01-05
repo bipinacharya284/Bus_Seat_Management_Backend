@@ -97,9 +97,7 @@ def create_table_payment_log():
       conn.close()
 
 
-# create_seat_table()
-
-
-# create_table_client()
-# create_table_travel_log()
-# create_table_payment_log()
+create_seat_table()
+create_table_client()
+create_table_travel_log()
+create_table_payment_log()
